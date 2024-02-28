@@ -1,0 +1,75 @@
+<div class="container mx-auto p-4">
+  <div class="flex items-center mb-4">
+    <h1 class="text-2xl font-bold m-auto">Items</h1>
+    <div>
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center mr-2"
+      >
+        <i class="ri-add-line align-middle text-lg mr-2"></i> Add Item
+      </button>
+      <a
+        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center"
+        routerLink="/cart"
+      >
+        <i class="ri-shopping-cart-line align-middle text-lg mr-2"></i> Cart
+      </a>
+    </div>
+  </div>
+
+  <table class="table-auto w-full border-collapse border-2 border-gray-500">
+    <thead>
+      <tr class="border-b-2 border-gray-500">
+        <th class="w-1/12 text-center py-2 border-2 border-gray-500">№</th>
+        <th class="w-2/12 text-center py-2 border-2 border-gray-500">ID</th>
+        <th class="w-3/12 text-center py-2 border-2 border-gray-500">Name</th>
+        <th class="w-2/12 text-center py-2 border-2 border-gray-500">Count</th>
+        <th class="w-2/12 text-center py-2 border-2 border-gray-500">Price</th>
+        <th class="w-2/12 text-center py-2 border-l-2 border-gray-500">Sum</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (item of itemsData; track $index) {
+      <tr class="border hover:bg-gray-300 group hover-trigger">
+        <td class="text-center py-2 border border-gray-500">
+          {{ $index + 1 }}
+        </td>
+        <td class="text-center py-2 border border-gray-500">
+          {{ item.item_id }}
+        </td>
+        <td class="text-center py-2 border border-gray-500">
+          {{ item.item_name }}
+        </td>
+        <td class="text-center py-2 border border-gray-500">
+          {{ item.item_count }}
+        </td>
+        <td class="text-center py-2 border border-gray-500">
+          {{ item.item_price }}
+        </td>
+        <td class="text-center py-2 border-l border-b border-gray-500">
+          {{ item.item_price * item.item_count }}
+        </td>
+        <td class="text-center py-2 border-b border-gray-500">
+          <div class="actions opacity-0 flex justify-between">
+            <button
+              class="p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            >
+              <i class="ri-pencil-line text-lg"></i>
+            </button>
+            <button
+              class="p-2 bg-green-500 hover:bg-green-600 text-white rounded ml-2"
+            >
+              <i class="ri-shopping-cart-line text-lg"></i>
+            </button>
+            <button
+              class="p-2 bg-red-500 text-white rounded hover:bg-red-600 ml-2"
+            >
+              <i class="ri-delete-bin-line text-lg"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
