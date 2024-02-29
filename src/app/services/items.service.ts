@@ -16,4 +16,12 @@ export class ItemsService {
   public getItemsData(): Observable<IItem[]> {
     return this.httpClient.get<IItem[]>(this.url);
   }
+
+  public addItem(item: IItem): Observable<IItem> {
+    return this.httpClient.post<IItem>(this.url, item);
+  }
+
+  public deleteItem(itemId: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/${itemId}`);
+  }
 }
