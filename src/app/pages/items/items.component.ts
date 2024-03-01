@@ -7,11 +7,12 @@ import { IItem } from '../../models/IItem.model';
 import { ItemsActions } from '../../redux/actions/items.actions';
 import { selectItemsData } from '../../redux/selectors/items.selectors';
 import { AddItemComponent } from '../../shared/add-item/add-item.component';
+import { UpdateItemComponent } from '../../shared/update-item/update-item.component';
 
 @Component({
   selector: 'app-items',
   standalone: true,
-  imports: [AddItemComponent],
+  imports: [AddItemComponent, UpdateItemComponent],
   templateUrl: './items.component.html',
   styleUrl: './items.component.scss',
   animations: [
@@ -29,6 +30,9 @@ export class ItemsComponent implements OnInit, OnDestroy {
   private itemsDataSubscription!: Subscription;
 
   public isAddItemModalOpen = false;
+
+  public isUpdateItemModalOpen = false;
+  public updateData!: IItem;
 
   constructor(private store: Store) {}
 
@@ -48,12 +52,25 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.isAddItemModalOpen = false;
   }
 
+  openUpdateItemModal(item: IItem) {
+    this.updateData = item;
+    this.isUpdateItemModalOpen = true;
+  }
+
+  closeUpdateItemModal() {
+    this.isUpdateItemModalOpen = false;
+  }
+
   addItem(item: IItem) {
     this.store.dispatch(ItemsActions.addItem({ item }));
   }
 
   deleteItem(itemId: number) {
     this.store.dispatch(ItemsActions.deleteItem({ itemId }));
+  }
+
+  updateItem(item: IItem) {
+    this.store.dispatch(ItemsActions.updateItem({ item }));
   }
 
   ngOnDestroy(): void {

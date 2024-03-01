@@ -8,5 +8,6 @@ export const ItemsActions = createActionGroup({
     'Load ItemsData': props<{ itemsData: IItem[] }>(),
     'Add Item': props<{ item: IItem }>(),
     'Delete Item': props<{ itemId: number }>(),
+    'Update Item': props<{ item: IItem }>(),
   }
 });

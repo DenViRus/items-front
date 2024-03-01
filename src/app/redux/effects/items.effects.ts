@@ -50,4 +50,18 @@ export class ItemsEffects {
       })
     );
   });
+
+  updateItem$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ItemsActions.updateItem),
+      switchMap(({ item }) => {
+        return this.itemsService.updateItem(item).pipe(
+          switchMap(() => this.itemsService.getItemsData()),
+          map((itemsData: IItem[]) => {
+            return ItemsActions.loadItemsData({ itemsData });
+          })
+        );
+      })
+    );
+  });
 }

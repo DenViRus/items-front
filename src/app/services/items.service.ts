@@ -24,4 +24,8 @@ export class ItemsService {
   public deleteItem(itemId: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.url}/${itemId}`);
   }
+  
+  public updateItem(item: IItem): Observable<IItem> {
+    return this.httpClient.put<IItem>(`${this.url}/${item.item_id}`, item);
+  }
 }
